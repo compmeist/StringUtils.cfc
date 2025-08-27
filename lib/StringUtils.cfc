@@ -210,26 +210,35 @@ component
 	}
 
     /* indexOf - keep convention in Coldfusion of start at 1 */
-    public string function indexOf( string value = "", string subs = "", numeric startAt = 1 ) {
+    public numeric function indexOf( string value = "", string subs = "", numeric startAt = 1 ) {
       if (startAt >= 1)
         return( find( subs, value, startAt ) );
       else
         return( find( subs, value ) );
     }
    
-    public string function FindLast(subs,ss) {
-      return len(ss) + 1 - (len(subs)) - find(reverse(subs),reverse(ss)) + 1  ;
-    }
-    public string function FindLastNoCase(subs,ss) {
-      return len(ss) + 1 - (len(subs)) - findNoCase(reverse(subs),reverse(ss)) + 1  ;
-    }
+public numeric function findLast(required string ndle, required string hstk, numeric startAt = 1) {
+	if (!len(ndle) or !len(hstk)) return 0;
+	// Reverse trick: first match in reversed strings == last match in original
+	var posRev = find( reverse(ndle), reverse(hstk),startAt ); // case-sensitive
+	if (posRev == 0) return 0;
+	// Convert reversed index back to the original 1-based position
+	return len(hstk) - posRev - len(ndle) + 2;
+  }
+
+  public numeric function findLastNoCase(required string ndle, required string hstk, numeric startAt = 1) {
+	if (!len(ndle) or !len(hstk)) return 0;
+	var posRev = findNoCase( reverse(ndle), reverse(hstk),startAt );
+	if (posRev == 0) return 0;
+	return len(hstk) - posRev - len(ndle) + 2;
+  }
     public string function strStartingAt(string value = "", numeric s0 = 1 ) {
       if (not (s0 > 1)) s0 = 1;
       return Mid(value,s0,len(value));
     }
 
     /* lastIndexOf */
-    public string function lastIndexOf( string value = "", string subs = "", numeric startAt = 1 ) {
+    public numeric function lastIndexOf( string value = "", string subs = "", numeric startAt = 1 ) {
         if (startAt > 1)
           return( FindLast( subs, strStartingAt(value,startAt), startAt ) );
         else
