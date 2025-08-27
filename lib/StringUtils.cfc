@@ -223,19 +223,17 @@ component
     public string function FindLastNoCase(subs,ss) {
       return len(ss) + 1 - (len(subs)) - findNoCase(reverse(subs),reverse(ss)) + 1  ;
     }
-    public string function strStartsAt(string value = "", numeric s0 = 1 ) {
-      if (s0 >= 1)
-        return Mid(value,s0,len(value)-1);
-      else
-        return(value);
+    public string function strStartingAt(string value = "", numeric s0 = 1 ) {
+      if (not (s0 > 1)) s0 = 1;
+      return Mid(value,s0,len(value));
     }
 
     /* lastIndexOf */
     public string function lastIndexOf( string value = "", string subs = "", numeric startAt = 1 ) {
-      if (startAt >= 1)
-        return( FindLast( subs, strStartsAt(value,startAt), startAt ) );
-      else
-        return( FindLast( subs, value ) );
+        if (startAt > 1)
+          return( FindLast( subs, strStartingAt(value,startAt), startAt ) );
+        else
+          return( FindLast( subs, value ) );
     }
 
 
