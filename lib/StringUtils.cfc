@@ -209,6 +209,34 @@ component
 
 	}
 
+    /* indexOf - keep convention in Coldfusion of start at 1 */
+    public string function indexOf( string value = "", string subs = "", numeric startAt = 1 ) {
+      if (startAt >= 1)
+        return( find( subs, value, startAt ) );
+      else
+        return( find( subs, value ) );
+    }
+   
+    public string function FindLast(subs,ss) {
+      return len(ss) + 1 - (len(subs)) - find(reverse(subs),reverse(ss)) + 1  ;
+    }
+    public string function FindLastNoCase(subs,ss) {
+      return len(ss) + 1 - (len(subs)) - findNoCase(reverse(subs),reverse(ss)) + 1  ;
+    }
+    public string function strStartsAt(string value = "", numeric s0 = 1 ) {
+      if (s0 >= 1)
+        return Mid(value,s0,len(value)-1);
+      else
+        return(value);
+    }
+
+    /* lastIndexOf */
+    public string function lastIndexOf( string value = "", string subs = "", numeric startAt = 1 ) {
+      if (startAt >= 1)
+        return( FindLast( subs, strStartsAt(value,startAt), startAt ) );
+      else
+        return( FindLast( subs, value ) );
+    }
 
 
 	/*
