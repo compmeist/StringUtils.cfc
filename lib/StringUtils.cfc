@@ -239,8 +239,8 @@ public numeric function findLast(required string ndle, required string hstk, num
 
     /* lastIndexOf */
     public numeric function lastIndexOf( string value = "", string subs = "", numeric startAt = 1 ) {
-        if (not (startAt > 1)) startAt = 1;
-        return( FindLast( subs, strStartingAt(value,startAt), startAt ) );
+        
+        return FindLast( subs, value, startAt ) ;
     }
 
 
